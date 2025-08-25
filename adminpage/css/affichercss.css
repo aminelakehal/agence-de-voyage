@@ -1,0 +1,159 @@
+@import "bourbon";
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+
+* {box-sizing: border-box;}
+body {font-family: 'Roboto', sans-serif; font-size: 14px;}
+
+a {
+  text-decoration: none;
+  color: #7CBBEA;
+  &:hover {text-decoration: underline;}
+}
+/* SIDEBAR *********************************/
+.sidebar {
+    position: absolute;
+    width: 220px ;
+    height: 100%;
+    background: #34495E;
+    z-index: 1;
+  }
+  
+  .user {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background: #479ae8;
+    
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 50px;
+      margin-right: 5px;
+      border-radius: 100%;
+    }
+    .username {
+      color: white;
+      font-weight: bold;
+    }
+  }
+  
+  nav {
+    ul {
+      list-style: none;
+      margin: 20px 0 0 0;
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+      display: block;
+      padding: 20px 0 20px 30px;
+      color: #bbb;
+      letter-spacing: 1px;
+      &:hover {
+        text-decoration: none;
+        background: darken(#34495E, 10%);
+        color: white;
+      }
+      
+    }
+  }
+  /* MAIN ***********************************/
+.main {
+    position: absolute;
+    right: 0;
+    width: calc(100% - 220px );
+    height: 100%;
+    
+  }
+  
+  /* HEADER */
+  header {
+    position: relative;
+    width: 100%;
+    height: 270px;
+    background: white;
+    box-shadow: 0 0 3px rgba(black, .3);
+  }
+  
+   
+  
+  .logo {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    background-image: url();
+    border-radius: 100%;
+    text-align: center;
+    line-height: 42px;
+    font-size: 40px;
+    font-weight: bold;
+    
+  }
+  
+  
+  
+  .identity {
+    display: inline-block;
+    min-width: 250px;
+  
+    img {
+      
+      display: inline-block;
+      vertical-align: top;
+      width: 80px;
+      margin-right: 15px;
+      border-radius: 100%;
+    }
+    .name {font-weight: bold; font-size: 16px; margin-bottom: 3px;}
+    .info {color: #888;}
+  }
+  
+  .logout {
+    position: relative;
+    float: right;
+    padding: 5px 10px;
+    color: tomato;
+    font-weight: bold;
+    border: 2px solid tomato;
+    cursor: pointer;
+    user-select: none;
+    hover {
+    background: tomato;
+      color: white;
+    }
+    &:active {
+      top: 1px;
+    }
+  }
+  
+  ul.nav2 {
+    position: absolute;
+    bottom: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  font-size: 15px;
+  
+    li{
+    display: inline-block;
+    }
+    
+    a {
+      display: inline-block;
+      padding: 7px 0;
+      margin-right: 30px;
+      color: black;
+      &:hover {
+        border-bottom: 4px solid #5db9f7;
+        text-decoration: none;
+      }
+     
+    }
+  }
+  
