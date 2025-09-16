@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php'; // inclure la connexion
+require_once 'config.php'; 
 
 try {
     if (isset($_POST['Valider'])) {
