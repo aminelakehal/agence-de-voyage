@@ -4,9 +4,6 @@ include('layouts/sidebar.php')?>
 require_once 'config.php';
 
 try {
-    $connexion = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     // Get form values
     $hname = $_POST['hname'];
     $Date_Debut = $_POST['Date_Debut'];

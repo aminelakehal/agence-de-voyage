@@ -1,13 +1,8 @@
 
 <?php
 // Connection established once at the beginning  
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "agence de voyage";
+require_once 'config.php';
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // Delete client (if idClient received via GET)
   if (isset($_GET['id'])) {
