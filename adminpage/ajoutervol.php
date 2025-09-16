@@ -2,11 +2,7 @@
 include('layouts/sidebar.php')?>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "agence de voyage"; // Replace with your database name
-
+require_once 'config.php';
 try {
     $connexion = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
