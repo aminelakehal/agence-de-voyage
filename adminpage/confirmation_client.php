@@ -1,56 +1,44 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "agence de voyage";
+require_once 'config.php'; // connexion PDO
 
-// Connect to the database
-$connexion = mysqli_connect($servername, $username, $password, $dbname);
+try {
+    // Confirmer sélection
+    if (isset($_POST['confirmer']) && !empty($_POST['check'])) {
+        $selectedFlightIDs = $_POST['check'];
 
-// Check the connection
-if (!$connexion) {
-    die("Échec de la connexion à la base de données : " . mysqli_connect_error());
-}
+        $sql = "UPDATE reservation_vol SET statut = 1 WHERE FlightID = :FlightID";
+        $stmt = $connexion->prepare($sql);
 
-// Check if the form is submitted
-if (isset($_POST['confirmer'])) {
-    // Get the selected FlightIDs
-    $selectedFlightIDs = isset($_POST['check']) ? $_POST['check'] : [];
+        foreach ($selectedFlightIDs as $flightID) {
+            if (is_numeric($flightID)) {
+                $stmt->execute([":FlightID" => $flightID]);
+            }
+        }
 
-    // Update the confirmation status for selected flights
-    foreach ($selectedFlightIDs as $flightID) {
-        $updateSql = "UPDATE reservation_vol SET statut = 1 WHERE FlightID = '$flightID'";
-        mysqli_query($connexion, $updateSql);
+        header("Location: confirmation_client.php");
+        exit;
     }
 
-    // Redirect after confirmation
-    header("Location: confirmation_client.php");
-    exit();
+    // Supprimer un vol
+    if (isset($_POST['delete']) && is_numeric($_POST['delete'])) {
+        $deleteFlightID = $_POST['delete'];
+        $sql = "DELETE FROM reservation_vol WHERE FlightID = :FlightID";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([":FlightID" => $deleteFlightID]);
+
+        header("Location: confirmation_client.php");
+        exit;
+    }
+
+    // Récupération des réservations
+    $sql = "SELECT * FROM reservation_vol";
+    $stmt = $connexion->query($sql);
+    $reservationsVol = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Erreur SQL : " . $e->getMessage();
 }
 
-if (isset($_POST['delete'])) {
-    $deleteFlightID = $_POST['delete'];
-    $deleteSql = "DELETE FROM reservation_vol WHERE FlightID = '$deleteFlightID'";
-    mysqli_query($connexion, $deleteSql);
-
-    // Redirect after deletion
-    header("Location: confirmation_client.php");
-    exit();
-}
-
-// Fetch reservation data for display
-$sql = "SELECT * FROM reservation_vol";
-$result = mysqli_query($connexion, $sql);
-
-// Check the results
-if ($result) {
-    $reservationsVol = mysqli_fetch_all($result, MYSQLI_ASSOC);
-} else {
-    echo "Erreur dans la requête : " . mysqli_error($connexion);
-}
-
-// Close the database connection
-mysqli_close($connexion);
 ?>
 
 <!DOCTYPE html>
